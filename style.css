@@ -1,0 +1,21 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 80vh;
+}
+.window {
+  position: absolute;
+}
+#cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  max-width: 95vw;
+  max-height: 90vh;
+}
+#cards > canvas {
+  margin: 5px;
+}
