@@ -280,17 +280,23 @@ const createCards = () => {
   for (let suit of cardsColorAndSuit) {
     for (let value = 1; value <= 13; value++) {
       // キャンバスを作成
-      const card = document.createElement('canvas');
-      // クリックした時の処理を追加
-      card.onclick = () => clickCard(suit.suit, value);
+      const card = document.createElement('div');
+      const cardBackFace = document.createElement('div');
+      cardBackFace.className = 'cardBackFace';
+      card.appendChild(cardBackFace);
 
-      // カードのスタイルを設定
-      card.style.border = '1px solid black';
+      const canvas = document.createElement('canvas');
+      // クリックした時の処理を追加
+      card.onclick = () => clickCard(suit.suit, value, card);
+
       // キャンバスのコンテキストを取得
-      const ctx = card.getContext('2d');
+      const ctx = canvas.getContext('2d');
       // キャンバスのサイズを設定
-      card.width = 100;
-      card.height = 150;
+      canvas.width = 100;
+      canvas.height = 150;
+
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, 100, 150);
 
       // カードの色を設定
       ctx.fillStyle = suit.color;
@@ -319,6 +325,7 @@ const createCards = () => {
         ctx.fillText(word, 50, 75);
         ctx.strokeText(word, 50, 75);
 
+        card.appendChild(canvas);
         result.push(card);
 
         continue;
@@ -335,6 +342,7 @@ const createCards = () => {
         }
         ctx.fillText(suit.suit, 0, 0);
       }
+      card.appendChild(canvas);
       result.push(card);
     }
   }
